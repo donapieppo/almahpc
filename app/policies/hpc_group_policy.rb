@@ -14,4 +14,8 @@ class HpcGroupPolicy < ApplicationPolicy
   def update?
     @user.hpc_group_manager?(@record)
   end
+
+  def destroy?
+    @user.is_cesia?
+  end
 end

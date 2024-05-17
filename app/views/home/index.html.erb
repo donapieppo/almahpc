@@ -2,3 +2,18 @@
 
 <h2>Welcome to HPC!</h2>
 
+<% if current_user %>
+  <% memberships = current_user.hpc_memberships.includes(:hpc_group).all %>
+  <% if memberships.any? %>
+    <h2>You are member of the HPC cluster.</h2>
+    You belongs to the following groups:
+    <div class="list-group">
+      <% memberships.each do |ms| %>
+        <%= link_to ms.hpc_group, ms.hpc_group, class: "list-group-item list-group-item-action" %>
+      <% end %>
+    </div>
+  <% else %>
+    You are actually <strong>not member</strong> of any HPC group.
+    In order to apply please....
+  <% end %>
+<% end %>

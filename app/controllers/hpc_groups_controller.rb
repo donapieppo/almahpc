@@ -36,6 +36,16 @@ class HpcGroupsController < ApplicationController
     end
   end
 
+  def destroy
+    if @hpc_group.hpc_memberships.any?
+      flash[:alert] = "Please selete members before group"
+    else
+      @hpc_group.destroy!
+      flash[:notice] = "Group was successfully destroyed."
+    end
+    redirect_to hpc_groups_url, status: :see_other
+  end
+
   private
 
   def set_hpc_group_and_check_permission
