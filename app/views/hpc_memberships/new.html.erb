@@ -1,0 +1,11 @@
+<h1>Aggiungi utente a <%= @hpc_group %></h1>
+
+<%= simple_form_for [@hpc_group, @hpc_membership] do |f| %>
+  <div class="my-2">
+    <%= label_tag 'Email: ' %> <%= text_field_tag :upn %>
+  </div>
+  <div>
+    <%= label_tag 'Ruolo manager: ' %> <%= check_box_tag 'manager', 'manager' %>
+  </div>
+  <%= f.submit "salva" %>
+<% end %>

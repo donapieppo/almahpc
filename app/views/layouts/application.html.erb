@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render DmUniboCommon::HeaderComponent.new %>
+  <body>
+    <%= render partial: 'layouts/menu' %>
+
+    <main role="main" class="container">
+      <%= render DmUniboCommon::PrivacyAlertComponent.new(cookies) %>  
+      <%= render DmUniboCommon::BootstrapAlertComponent.new(flash) %>  
+      <%= turbo_frame_tag "modal" %>
+      <%= yield %>
+    </main>
+
+    <%# <%= button_to "AZURE LOGIN", '/dm_unibo_common/auth/azure_activedirectory_v2', data: {turbo: false} %>
+    <%= render DmUniboCommon::FooterComponent.new(current_user, contact_mail: "dipmat-supportoweb@unibo.it") %>  
+    <%= render DmUniboCommon::ImpersonationComponent.new(current_user, true_user, 
+                                                         who_impersonate_path: dm_unibo_common.who_impersonate_path, 
+                                                         stop_impersonating_path: dm_unibo_common.stop_impersonating_path) %>
+  </body>
+</html>
