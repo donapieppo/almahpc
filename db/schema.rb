@@ -61,6 +61,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.integer "user_id", null: false, unsigned: true
     t.boolean "manager", default: false
     t.text "notes"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["hpc_group_id"], name: "fk_groups_hpc_memberships"
     t.index ["user_id"], name: "fk_users_hpc_memberships"
   end
@@ -88,6 +90,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.string "surname"
     t.string "email"
     t.text "authorized_keys"
+    t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["upn"], name: "index_upn_on_users"
   end

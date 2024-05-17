@@ -7,8 +7,10 @@
 <div class="list-group">
   <% @hpc_groups.each do |g| %>
     <%= link_to g, class: "list-group-item list-group-item-action" do %>
-      <%= g %> <br/>
-      <small><%= g.description %></small>
+      <h3><%= g %></h3>
+      <div class="ps-2 small">
+        <%= g.description %>
+      </div>
     <% end %>
   <% end %>
 </div>

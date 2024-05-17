@@ -46,8 +46,12 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
-  def set_user_and_check_permission
+  # JSON pubblico per tutti
+  def memberships_to_sync
+    skip_authorization
+    @users = HpcMembership.joins(:user).where("users.updated_at > ?", 1.day.ago).map(&:user).uniq
+    respond_to do |format|
+      format.json { render json: @users.map(&:upn).to_json }
+    end
   end
 end

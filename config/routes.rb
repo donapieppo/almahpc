@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :users do
     get :me, on: :collection
     get :myedit, on: :collection
+    get :memberships_to_sync, on: :collection
   end
 
   scope ":__org__" do
