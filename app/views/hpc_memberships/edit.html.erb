@@ -1,0 +1,11 @@
+<h1>
+  Modifica Ruolo <%= @hpc_membership.user %> <br/>
+  a <%= @hpc_membership.hpc_group %>
+</h1>
+
+<%= simple_form_for [@hpc_group, @hpc_membership] do |f| %>
+  <div>
+    <%= label_tag 'Ruolo manager: ' %> <%= check_box_tag 'manager', 'manager', @hpc_membership.manager %>
+  </div>
+  <%= f.submit "salva" %>
+<% end %>

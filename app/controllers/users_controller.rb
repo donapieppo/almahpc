@@ -16,7 +16,11 @@ class UsersController < ApplicationController
 
   def create
     authorize :user
-    @user = User.syncronize(params[:user][:upn])
+    if (@user = User.syncronize(params[:user][:upn]))
+      if !@user.ldap_create
+        flash[:error] = "Operation not possibile"
+      end
+    end
     redirect_to users_path
   end
 

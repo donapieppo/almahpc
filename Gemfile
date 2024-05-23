@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "dm_unibo_user_search", git: "https://github.com/donapieppo/dm_unibo_user_search.git"
 gem "dm_unibo_common", git: "https://github.com/donapieppo/dm_unibo_common.git", branch: "master"
+gem "ad2gnu", git: "https://github.com/donapieppo/ad2gnu.git", branch: "net-ldap"
 
 gem "jsbundling-rails"
 gem "cssbundling-rails"
