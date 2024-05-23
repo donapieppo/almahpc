@@ -54,6 +54,6 @@ class HpcGroupsController < ApplicationController
   end
 
   def hpc_group_params
-    params.require(:hpc_group).permit(:name, :description)
+    params.require(:hpc_group).permit(:name, :slug, :description)
   end
 end

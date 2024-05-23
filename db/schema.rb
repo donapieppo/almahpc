@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
 
   create_table "hpc_groups", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.string "slug", null: false
     t.text "description"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
