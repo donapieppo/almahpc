@@ -3,6 +3,10 @@ class HpcMembershipPolicy < ApplicationPolicy
     @user.hpc_group_manager?(@record.hpc_group)
   end
 
+  def update?
+    @user.hpc_group_manager?(@record.hpc_group)
+  end
+
   def destroy?
     @user.hpc_group_manager?(@record.hpc_group)
   end

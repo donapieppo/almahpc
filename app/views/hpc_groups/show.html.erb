@@ -1,15 +1,18 @@
 <h1>
   <%= @hpc_group %> 
-  <%= link_to_edit("", [:edit, @hpc_group]) if policy(@hpc_group).edit? %>
+  <%= link_to_edit("", [:edit, @hpc_group]) if policy(@hpc_group).edit? %> <br/>
+  <small><%= @hpc_group.slug %></small>
 </h1>
 
 <div class="alert alert-warning">
   <%= @hpc_group.description %>
 </div>
 
-<div class="text-end my-2">
-  <%= link_to "Aggiungi nuovo utente", new_hpc_group_hpc_membership_path(@hpc_group), class: "btn btn-primary" %>
-</div>
+<% if policy(@hpc_group).edit? %>
+  <div class="text-end my-2">
+    <%= link_to "Aggiungi nuovo utente", new_hpc_group_hpc_membership_path(@hpc_group), class: "btn btn-primary" %>
+  </div>
+<% end %>
 
 <h2>Lista abilitati</h2>
 
@@ -17,9 +20,12 @@
   <% @hpc_group.hpc_memberships.includes(:user).order("users.name").each do |hm| %>
     <div class="list-group-item <%= "list-group-item-primary" if hm.manager %>">
       <%= link_to hm.user, hm.user %> <small>(<%= hm.user.upn %>)</small>
-      <div class="float-end">
-        <%= link_to_delete "", hm %>
-      </div>
+      <% if policy(@hpc_group).edit? %>
+        <div class="float-end">
+          <%= link_to_delete "", hm %>
+          <%= link_to_edit "", [:edit, hm] %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

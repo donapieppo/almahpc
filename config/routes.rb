@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   scope ":__org__" do
     resources :users
-    resources :hpc_memberships, only: :destroy
+    resources :hpc_memberships
     resources :hpc_groups do
       resources :hpc_memberships
     end
