@@ -49,20 +49,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "hpc_memberships", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
-    t.integer "slurm_account_id", null: false, unsigned: true
-    t.integer "user_id", null: false, unsigned: true
-    t.boolean "manager", default: false
-    t.text "notes"
-    t.integer "partition_id", unsigned: true
-    t.integer "share", unsigned: true
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-    t.index ["partition_id"], name: "fk_partition_hpc_memberships"
-    t.index ["slurm_account_id"], name: "fk_accounts_hpc_memberships"
-    t.index ["user_id"], name: "fk_users_hpc_memberships"
-  end
-
   create_table "organizations", id: { type: :integer, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 250
     t.string "name"
@@ -92,6 +78,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.datetime "updated_at", precision: nil
   end
 
+  create_table "slurm_associations", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
+    t.integer "user_id", null: false, unsigned: true
+    t.integer "slurm_account_id", null: false, unsigned: true
+    t.integer "partition_id", unsigned: true
+    t.boolean "manager", default: false
+    t.text "notes"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.index ["partition_id"], name: "fk_partition_slurm_associations"
+    t.index ["slurm_account_id"], name: "fk_accounts_slurm_associations"
+    t.index ["user_id"], name: "fk_users_slurm_associations"
+  end
+
   create_table "users", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
     t.string "upn", null: false
     t.string "name"
@@ -105,9 +104,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "hpc_memberships", "partitions", name: "fk_partition_hpc_memberships", on_delete: :cascade
-  add_foreign_key "hpc_memberships", "slurm_accounts", name: "fk_accounts_hpc_memberships", on_delete: :cascade
-  add_foreign_key "hpc_memberships", "users", name: "fk_users_hpc_memberships", on_delete: :cascade
   add_foreign_key "permissions", "organizations", name: "fk_organization_permission", on_delete: :cascade
   add_foreign_key "permissions", "users", name: "fk_user_permission", on_delete: :cascade
+  add_foreign_key "slurm_associations", "partitions", name: "fk_partition_slurm_associations", on_delete: :cascade
+  add_foreign_key "slurm_associations", "slurm_accounts", name: "fk_accounts_slurm_associations", on_delete: :cascade
+  add_foreign_key "slurm_associations", "users", name: "fk_users_slurm_associations", on_delete: :cascade
 end

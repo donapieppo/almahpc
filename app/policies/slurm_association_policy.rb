@@ -1,4 +1,4 @@
-class HpcMembershipPolicy < ApplicationPolicy
+class SlurmAssociationPolicy < ApplicationPolicy
   def create?
     @user.slurm_account_manager?(@record.slurm_account)
   end
