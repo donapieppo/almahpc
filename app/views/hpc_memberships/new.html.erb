@@ -1,11 +1,21 @@
-<h1>Aggiungi utente a <%= @hpc_group %></h1>
+<h1>Aggiungi utente a <%= @slurm_account %></h1>
 
-<%= simple_form_for [@hpc_group, @hpc_membership] do |f| %>
-  <div class="my-2">
-    <%= label_tag 'Email: ' %> <%= text_field_tag :upn %>
+<%= simple_form_for [@slurm_account, @slurm_association] do |f| %>
+  <div class="row mb-3 string optional user_upn">
+    <label class="col-sm-3 col-form-label string optional" for="user_upn">
+      Email
+    </label>
+    <div class="col-sm-9">
+      <input class="form-control string optional" type="text" name="upn"/>
+    </div>
   </div>
-  <div>
-    <%= label_tag 'Ruolo manager: ' %> <%= check_box_tag 'manager', 'manager' %>
+  <div class="row mb-3 string optional user_upn">
+    <label class="col-sm-3 form-check-label" for="user_upn">
+      Ruolo manager
+    </label>
+    <div class="col-sm-9">
+      <input class="form-control form-check-input" type="checkbox" name="manager"/>
+    </div>
   </div>
-  <%= f.submit "salva" %>
+  <%= f.submit "Salva" %>
 <% end %>

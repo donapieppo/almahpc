@@ -1,6 +1,6 @@
 <%= render DmUniboCommon::MenuComponent.new(sso_user_upn, current_organization: current_organization) do %>  
   <li><%= link_to dm_icon('home', text: 'Home', size: :lg), main_app.root_path %></li>
   <li><%= link_to dm_icon('users', text: 'Utenti', size: :lg), main_app.users_path %></li>
-  <li><%= link_to dm_icon('users', text: 'Gruppi HPC', size: :lg), main_app.hpc_groups_path %></li>
+  <li><%= link_to dm_icon('users', text: 'Gruppi HPC', size: :lg), main_app.slurm_accounts_path %></li>
   <li><%= link_to dm_icon('user', text: 'Il mio profilo', size: :lg), main_app.myedit_users_path %></li>
 <% end %>

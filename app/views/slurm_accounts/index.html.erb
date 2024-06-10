@@ -1,11 +1,11 @@
 <h1>Gruppi HPC</h1>
 
 <div class="my-2 text-end">
-  <%= link_to "Nuovo Gruppo", new_hpc_group_path, class: "btn btn-primary" %>
+  <%= link_to "Nuovo Gruppo", new_slurm_account_path, class: "btn btn-primary" %>
 </div>
 
 <div class="list-group">
-  <% @hpc_groups.each do |g| %>
+  <% @slurm_accounts.each do |g| %>
     <%= link_to g, class: "list-group-item list-group-item-action" do %>
       <h3><%= g %></h3>
       <div class="ps-2 small">

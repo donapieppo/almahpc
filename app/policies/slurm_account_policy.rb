@@ -1,4 +1,4 @@
-class HpcGroupPolicy < ApplicationPolicy
+class SlurmAccountPolicy < ApplicationPolicy
   def index?
     @user
   end
@@ -12,7 +12,7 @@ class HpcGroupPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.hpc_group_manager?(@record)
+    @user.slurm_account_manager?(@record)
   end
 
   def destroy?

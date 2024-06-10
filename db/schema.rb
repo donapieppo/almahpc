@@ -49,22 +49,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "hpc_groups", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "slug", null: false
-    t.text "description"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
-  end
-
   create_table "hpc_memberships", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
-    t.integer "hpc_group_id", null: false, unsigned: true
+    t.integer "slurm_account_id", null: false, unsigned: true
     t.integer "user_id", null: false, unsigned: true
     t.boolean "manager", default: false
     t.text "notes"
+    t.integer "partition_id", unsigned: true
+    t.integer "share", unsigned: true
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.index ["hpc_group_id"], name: "fk_groups_hpc_memberships"
+    t.index ["partition_id"], name: "fk_partition_hpc_memberships"
+    t.index ["slurm_account_id"], name: "fk_accounts_hpc_memberships"
     t.index ["user_id"], name: "fk_users_hpc_memberships"
   end
 
@@ -72,6 +67,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.string "code", limit: 250
     t.string "name"
     t.string "description"
+  end
+
+  create_table "partitions", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "permissions", id: { type: :integer, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -83,6 +82,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.datetime "created_at", precision: nil
     t.index ["organization_id"], name: "fk_organization_permission"
     t.index ["user_id"], name: "fk_user_permission"
+  end
+
+  create_table "slurm_accounts", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.text "description"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "users", id: { type: :integer, unsigned: true }, charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
@@ -98,7 +105,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "hpc_memberships", "hpc_groups", name: "fk_groups_hpc_memberships", on_delete: :cascade
+  add_foreign_key "hpc_memberships", "partitions", name: "fk_partition_hpc_memberships", on_delete: :cascade
+  add_foreign_key "hpc_memberships", "slurm_accounts", name: "fk_accounts_hpc_memberships", on_delete: :cascade
   add_foreign_key "hpc_memberships", "users", name: "fk_users_hpc_memberships", on_delete: :cascade
   add_foreign_key "permissions", "organizations", name: "fk_organization_permission", on_delete: :cascade
   add_foreign_key "permissions", "users", name: "fk_user_permission", on_delete: :cascade

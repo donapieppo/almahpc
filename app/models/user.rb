@@ -1,10 +1,10 @@
 class User < ApplicationRecord
   include DmUniboCommon::User
-  has_many :hpc_memberships
-  has_and_belongs_to_many :hpc_groups, through: :hpc_memberships
+  has_many :slurm_associations
+  has_and_belongs_to_many :slurm_accounts, through: :slurm_associations
 
-  def hpc_group_manager?(hg)
-    self.is_cesia? || self.hpc_memberships.where(manager: true).any?
+  def slurm_account_manager?(hg)
+    self.is_cesia? || self.slurm_associations.where(manager: true).any?
   end
 
   def ldap_create

@@ -4,8 +4,8 @@
   <div class="col-md-6">
     <h2>Gruppi Hpc</h2>
     <div class="list-group">
-    <% @user.hpc_memberships.includes(:hpc_group).each do |hm| %>
-      <%= link_to hm.hpc_group, hm.hpc_group, class: "list-group-item list-group-item-action" %>
+    <% @user.slurm_associations.includes(:slurm_account).each do |hm| %>
+      <%= link_to hm.slurm_account, hm.slurm_account, class: "list-group-item list-group-item-action" %>
     <% end %>
     </div>
   </div>

@@ -3,17 +3,34 @@
 <h2>Welcome to HPC!</h2>
 
 <% if current_user %>
-  <% memberships = current_user.hpc_memberships.includes(:hpc_group).all %>
+  <% memberships = current_user.slurm_associations.includes(:slurm_account).all %>
   <% if memberships.any? %>
     <h2>You are member of the HPC cluster.</h2>
     You belongs to the following groups:
     <div class="list-group">
       <% memberships.each do |ms| %>
-        <%= link_to ms.hpc_group, ms.hpc_group, class: "list-group-item list-group-item-action" %>
+        <%= link_to ms.slurm_account, ms.slurm_account, class: "list-group-item list-group-item-action" %>
       <% end %>
     </div>
   <% else %>
     You are actually <strong>not member</strong> of any HPC group.
     In order to apply please....
   <% end %>
+<% else %>
+  <div class="text-center my-3">
+    <h3 class="my-3">Per accedere usare le credenziali Unibo</h3>
+    <% if Rails.env.development? && Rails.configuration.dm_unibo_common[:omniauth_provider] == :developer %>
+      <%= form_with url: "/dm_unibo_common/auth/developer", data: {turbo: false} do |f| %> 
+        <%= f.button dm_icon('sign-in', text: " Developer login", size: :lg), class: "btn btn-primary" %> 
+      <% end %>
+    <% elsif Rails.env.production? && Rails.configuration.dm_unibo_common[:omniauth_provider] == :azure_activedirectory_v2 %>
+      <%= form_with url: "/dm_unibo_common/auth/azure_activedirectory_v2", data: {turbo: false} do |f| %> 
+        <%= f.button dm_icon('sign-in', text: " Unibo login", size: :lg), class: "btn btn-primary" %> 
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
+
+<div class="alert alert-light my-3">
+  <%= Rails.configuration.home_description %>
+</div>

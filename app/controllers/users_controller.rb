@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   # JSON pubblico per tutti
   def memberships_to_sync
     skip_authorization
-    @users = HpcMembership.joins(:user).where("users.updated_at > ?", 1.day.ago).map(&:user).uniq
+    @users = SlurmAssociation.joins(:user).where("users.updated_at > ?", 1.day.ago).map(&:user).uniq
     respond_to do |format|
       format.json { render json: @users.map(&:upn).to_json }
     end

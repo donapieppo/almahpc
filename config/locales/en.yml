@@ -30,7 +30,7 @@
 en:
   activerecord:
     models:
-      hpc_group: HPC Group
+      slurm_account: Group
     attributes:
       project:
         name: Name

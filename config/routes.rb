@@ -19,11 +19,11 @@ Rails.application.routes.draw do
 
   scope ":__org__" do
     resources :users
-    resources :hpc_memberships
-    resources :hpc_groups do
-      resources :hpc_memberships
+    resources :slurm_associations
+    resources :slurm_accounts do
+      resources :slurm_associations
     end
 
-    get "/", to: "hpc_groups#index", as: "current_organization_root"
+    get "/", to: "slurm_accounts#index", as: "current_organization_root"
   end
 end
