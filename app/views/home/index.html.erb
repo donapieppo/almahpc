@@ -1,19 +1,16 @@
-<h1>AlmaHPC</h1>
-
-<h2>Welcome to HPC!</h2>
+<h1>Welcome to <br/>HPC@UNIBO User Portal</h1>
 
 <% if current_user %>
   <% memberships = current_user.slurm_associations.includes(:slurm_account).all %>
   <% if memberships.any? %>
-    <h2>You are member of the HPC cluster.</h2>
-    You belongs to the following groups:
+    You belong to the following groups:
     <div class="list-group">
       <% memberships.each do |ms| %>
         <%= link_to ms.slurm_account, ms.slurm_account, class: "list-group-item list-group-item-action" %>
       <% end %>
     </div>
   <% else %>
-    You are actually <strong>not member</strong> of any HPC group.
+    You are <strong>not member</strong> of any HPC@UNIBO group yet.
     In order to apply please....
   <% end %>
 <% else %>

@@ -1,16 +1,15 @@
 source "https://rubygems.org"
 
 gem "dm_unibo_user_search", git: "https://github.com/donapieppo/dm_unibo_user_search.git"
-# gem "dm_unibo_common", git: "https://github.com/donapieppo/dm_unibo_common.git", branch: "master"
-gem "dm_unibo_common", path: "/home/rails/gems/dm_unibo_common/"
+gem "dm_unibo_common", git: "https://github.com/donapieppo/dm_unibo_common.git", branch: "master"
+# gem "dm_unibo_common", path: "/home/rails/gems/dm_unibo_common/"
 
 gem "ad2gnu", git: "https://github.com/donapieppo/ad2gnu.git", branch: "net-ldap"
 
+gem "puma"
+
 gem "jsbundling-rails"
 gem "cssbundling-rails"
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
 
 gem "sprockets-rails", "=3.4.2", require: "sprockets/railtie"
 gem "omniauth-rails_csrf_protection"

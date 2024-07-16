@@ -3,8 +3,8 @@ class User < ApplicationRecord
   has_many :slurm_associations
   has_and_belongs_to_many :slurm_accounts, through: :slurm_associations
 
-  def slurm_account_manager?(hg)
-    self.is_cesia? || self.slurm_associations.where(manager: true).any?
+  def slurm_account_manager?(sa)
+    self.is_cesia? || self.slurm_associations.where(slurm_account: sa, manager: true).any?
   end
 
   def ldap_create
