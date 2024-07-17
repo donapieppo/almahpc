@@ -6,6 +6,6 @@
 </div>
 
 <%= simple_form_for @user do |f| %>
-  <%= f.input :authorized_keys %>
+  <%= f.input :authorized_keys, input_html: {rows: 10} %>
   <%= f.submit "Save" %>
 <% end %>

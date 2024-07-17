@@ -1,9 +1,14 @@
 <%= dm_form_for slurm_account do |f| %>
   <%= f.dm_error_notification %>  
   <%= f.input :name %>
-  <%= f.input :slug %>
-  <div class="my-2 offset-sm-3">
-    <%= f.rich_text_area :description %>
+  <%= f.input :slug, hint: "Userd as group name in ldap." %>
+  <div class="row my-3">
+    <div class="col-sm-3 text-end">
+      <label>Descrizione</label>
+    </div>
+    <div class="col-sm-9">
+      <%= f.rich_text_area :description %>
+    </div>
   </div>
   <%= f.submit %>
 <% end %>
