@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/donapieppo/ad2gnu.git
-  revision: 685f541a0d18a0f1f34a16771f786012174ff710
+  revision: 9c75f875d2bbf3ac3e3ca660343e2c39faff38fd
   branch: net-ldap
   specs:
     ad2gnu (0.0.3)

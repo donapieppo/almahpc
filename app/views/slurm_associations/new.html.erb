@@ -1,4 +1,4 @@
-<h1>Aggiungi utente a <%= @slurm_account %></h1>
+<h1>Add user to group <br/><%= @slurm_account %></h1>
 
 <%= simple_form_for [@slurm_account, @slurm_association] do |f| %>
   <div class="row mb-3 string optional user_upn">
@@ -11,11 +11,14 @@
   </div>
   <div class="row mb-3 string optional user_upn">
     <label class="col-sm-3 form-check-label" for="user_upn">
-      Ruolo manager
+      Manager role
     </label>
     <div class="col-sm-9">
-      <input class="form-control form-check-input" type="checkbox" name="manager"/>
+      <input class="form-control form-check-input" type="checkbox" name="manager"/><br/>
+      <hint>
+      A user is <strong>manager</strong> if he/she can add and delete users in the HPC group.
+      </hint>
     </div>
   </div>
-  <%= f.submit "Salva" %>
+  <%= f.submit "Add user"%>
 <% end %>

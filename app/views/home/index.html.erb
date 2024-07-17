@@ -1,12 +1,19 @@
-<h1>Welcome to <br/>HPC@UNIBO User Portal</h1>
+<h1><small>Welcome to</small><br/>HPC@UNIBO Portal</h1>
 
 <% if current_user %>
   <% memberships = current_user.slurm_associations.includes(:slurm_account).all %>
   <% if memberships.any? %>
-    You belong to the following groups:
+    <p class="my-2">
+    You belong to the following <strong>HPC groups</strong>:
+    </p>
     <div class="list-group">
       <% memberships.each do |ms| %>
-        <%= link_to ms.slurm_account, ms.slurm_account, class: "list-group-item list-group-item-action" %>
+        <%= link_to ms.slurm_account, class: "list-group-item list-group-item-action" do %>
+          <%= ms.slurm_account %>
+          <% if ms.manager? %>
+            <span class="float float-end">As manager</span>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   <% else %>
@@ -28,6 +35,10 @@
   </div>
 <% end %>
 
-<div class="alert alert-light my-3">
-  <%= Rails.configuration.home_description %>
+<div class="lead alert alert-info my-5 font-lg">
+  <p>Using <strong>HPC@UNIBO portal</strong> a user can:</p>
+  <ul style="list-style-type: disc">
+    <li style="list-style-type: disc">add new users (@unibo.it, @studio.unibo.it) to the HPC groups you are manager;</li>
+    <li style="list-style-type: disc">check the active projects;</li>
+  </ul>
 </div>

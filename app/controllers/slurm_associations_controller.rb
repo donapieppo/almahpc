@@ -11,14 +11,21 @@ class SlurmAssociationsController < ApplicationController
     @slurm_association = @slurm_account.slurm_associations.new
     authorize @slurm_association
 
-    if @user = User.syncronize(params[:upn])
-      @slurm_association.user = @user
-      @slurm_association.manager = params[:manager]
-      @slurm_association.save
-
+    if (@user = User.syncronizeDbAndLdap(params[:upn]))
+      if @user.slurm_associations.where(slurm_account: @slurm_account).any?
+        flash[:notice] = "Member already present in group."
+      else
+        @slurm_association.user = @user
+        @slurm_association.manager = params[:manager]
+        if @slurm_association.save
+          flash[:notice] = "Member added to group."
+        end
+      end
+    else
+      flash[:error] = "Operation not possibile."
     end
 
-    redirect_to @slurm_account, notice: "Member added to group."
+    redirect_to @slurm_account
   end
 
   def edit

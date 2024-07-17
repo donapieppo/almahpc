@@ -1,18 +1,14 @@
 class UserPolicy < ApplicationPolicy
   def index?
-    @user
+    @user.is_cesia?
   end
 
   def show?
-    @user # && ((@user == @record) || @user.staff?)
+    @user && ((@user == @record) || @user.is_cesia?)
   end
 
   def create?
-    @user
-  end
-
-  def edit?
-    @user&.staff?
+    @user.is_cesia?
   end
 
   def update?

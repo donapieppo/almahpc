@@ -1,27 +1,27 @@
-<h1>
-  <%= @slurm_account %> 
-  <%= link_to_edit("", [:edit, @slurm_account]) if policy(@slurm_account).edit? %> <br/>
-  <small><%= @slurm_account.slug %></small>
-</h1>
+<h1> <%= @slurm_account %> </h1>
 
-<div class="alert alert-warning">
+<div class="lead border-start ps-3 border-3 border-secondary my-3">
   <%= @slurm_account.description %>
 </div>
 
 <% if policy(@slurm_account).edit? %>
   <div class="text-end my-2">
-    <%= link_to "Aggiungi nuovo utente", new_slurm_account_slurm_association_path(@slurm_account), class: "btn btn-primary" %>
+    <%= link_to "Add new user", new_slurm_account_slurm_association_path(@slurm_account), class: "btn btn-primary" %>
+    <%= link_to "Modify name/description", [:edit, @slurm_account], class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<h2>Lista abilitati</h2>
+<hr/>
 
-<div class="list-group">
+<h2>Users in this group</h2>
+
+<div class="list-group my-3">
   <% @slurm_account.slurm_associations.includes(:user).order("users.name").each do |hm| %>
-    <div class="list-group-item <%= "list-group-item-primary" if hm.manager %>">
+    <div class="list-group-item <%= "list-group-item-primary" if hm.manager? %>">
       <%= link_to hm.user, hm.user %> <small>(<%= hm.user.upn %>)</small>
       <% if policy(@slurm_account).edit? %>
         <div class="float-end">
+          <%= dm_icon("crown") if hm.manager? %>
           <%= link_to_delete "", hm %>
           <%= link_to_edit "", [:edit, hm] %>
         </div>
@@ -29,3 +29,7 @@
     </div>
   <% end %>
 </div>
+
+<p class="my-3">
+ Note: managers are in blue.
+</p>

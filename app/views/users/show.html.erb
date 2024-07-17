@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h2>Gruppi Hpc</h2>
+    <p class="fw-bold">The user belongs to the following HPC groups:</p>
     <div class="list-group">
     <% @user.slurm_associations.includes(:slurm_account).each do |hm| %>
       <%= link_to hm.slurm_account, hm.slurm_account, class: "list-group-item list-group-item-action" %>
@@ -10,3 +10,10 @@
     </div>
   </div>
 </div>
+
+<% unless @user.authorized_keys.empty? %>
+  <p>Authorized ssh keys present:</p>
+  <p class="alert alert-light small">
+  <%= @user.authorized_keys %>
+  </p>
+<% end %>

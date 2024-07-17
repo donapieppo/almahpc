@@ -30,8 +30,11 @@
 en:
   activerecord:
     models:
-      slurm_account: Group
+      slurm_account: HPC group
+      slurm_association: HPC group
     attributes:
+      user:
+        upn: Email
       project:
         name: Name
       role:
