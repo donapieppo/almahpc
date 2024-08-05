@@ -19,7 +19,7 @@ module Almahpc
     config.time_zone = "Rome"
     config.i18n.default_locale = :en
 
-    config.hosts << "www.hpc.unibo.it:3000"
+    config.hosts << "hpc.unibo.it"
 
     config.authlevels = {read: 1, manage: 2}
 
