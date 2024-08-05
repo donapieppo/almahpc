@@ -11,9 +11,8 @@
   </div>
 </div>
 
-<% unless @user.authorized_keys.empty? %>
-  <p>Authorized ssh keys present:</p>
-  <p class="alert alert-light small">
-  <%= @user.authorized_keys %>
+<% if @user.authorized_keys.blank? %>
+  <p class="alert alert-warning small my-3">
+    No SSH Authorized Keys present.
   </p>
 <% end %>

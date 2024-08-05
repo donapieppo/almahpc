@@ -18,7 +18,7 @@
 <div class="list-group my-3">
   <% @slurm_account.slurm_associations.includes(:user).order("users.name").each do |hm| %>
     <div class="list-group-item <%= "list-group-item-primary" if hm.manager? %>">
-      <%= link_to hm.user, hm.user %> <small>(<%= hm.user.upn %>)</small>
+      <%= hm.user %> <small>(<%= hm.user.upn %>)</small>
       <% if policy(@slurm_account).edit? %>
         <div class="float-end">
           <%= dm_icon("crown") if hm.manager? %>

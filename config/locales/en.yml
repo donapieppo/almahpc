@@ -40,4 +40,8 @@ en:
       role:
         name: Name
         description: Description
+      slurm_account:
+        slug: Name
+        name: Description
+        description: Notes
 

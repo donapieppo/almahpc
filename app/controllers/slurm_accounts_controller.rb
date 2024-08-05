@@ -29,6 +29,8 @@ class SlurmAccountsController < ApplicationController
   end
 
   def update
+    # can not change slug
+    slurm_account_params.delete(:slug)
     if @slurm_account.update(slurm_account_params)
       redirect_to @slurm_account, notice: "Slurm Account was successfully updated.", status: :see_other
     else

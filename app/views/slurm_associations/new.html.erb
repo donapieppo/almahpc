@@ -1,5 +1,10 @@
 <h1>Add user to group <br/><%= @slurm_account %></h1>
 
+<div class="alert alert-info">
+  From this page it is possible to add users to the group HPC@UNIBO <%= @slurm_account %>.<br/>
+  A user is <strong>manager</strong> if he/she can add and delete users in the HPC group.
+</div>
+
 <%= simple_form_for [@slurm_account, @slurm_association] do |f| %>
   <div class="row mb-3 string optional user_upn">
     <label class="col-sm-3 col-form-label string optional" for="user_upn">
