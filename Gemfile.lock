@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/donapieppo/ad2gnu.git
-  revision: 9c75f875d2bbf3ac3e3ca660343e2c39faff38fd
+  revision: 49d7ee28391ae248b3abaffd02400947caacc7fe
   branch: net-ldap
   specs:
     ad2gnu (0.0.3)
@@ -129,7 +129,7 @@ GEM
     base64 (0.2.0)
     bigdecimal (3.1.8)
     bindex (0.8.1)
-    bootsnap (1.18.3)
+    bootsnap (1.18.4)
       msgpack (~> 1.2)
     builder (3.3.0)
     capybara (3.40.0)
@@ -144,7 +144,7 @@ GEM
     concurrent-ruby (1.3.3)
     connection_pool (2.4.1)
     crass (1.0.6)
-    cssbundling-rails (1.4.0)
+    cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
     date (3.3.4)
     debug (1.9.2)
@@ -152,10 +152,10 @@ GEM
       reline (>= 0.3.8)
     drb (2.2.1)
     erubi (1.13.0)
-    faraday (2.10.0)
+    faraday (2.10.1)
       faraday-net_http (>= 2.0, < 3.2)
       logger
-    faraday-net_http (3.1.0)
+    faraday-net_http (3.1.1)
       net-http
     ffi (1.17.0-x86_64-linux-gnu)
     globalid (1.2.1)
@@ -184,7 +184,7 @@ GEM
     jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jsbundling-rails (1.3.0)
+    jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     jwt (2.8.2)
       base64
@@ -224,9 +224,9 @@ GEM
       net-protocol
     nio4r (2.7.3)
     nkf (0.2.0)
-    nokogiri (1.16.6-x86_64-linux)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
-    nori (2.7.0)
+    nori (2.7.1)
       bigdecimal
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -258,12 +258,12 @@ GEM
       actionpack (>= 6.1)
     psych (5.1.2)
       stringio
-    public_suffix (6.0.0)
+    public_suffix (6.0.1)
     puma (6.4.2)
       nio4r (~> 2.0)
     pundit (2.3.2)
       activesupport (>= 3.0.0)
-    racc (1.8.0)
+    racc (1.8.1)
     rack (2.2.9)
     rack-protection (3.2.0)
       base64 (>= 0.1.0)
@@ -310,7 +310,7 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
-    rexml (3.3.2)
+    rexml (3.3.4)
       strscan
     rubyzip (2.3.2)
     savon (2.13.1)
@@ -322,7 +322,7 @@ GEM
       nokogiri (>= 1.8.1)
       nori (~> 2.4)
       wasabi (~> 3.4)
-    selenium-webdriver (4.22.0)
+    selenium-webdriver (4.23.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -347,7 +347,7 @@ GEM
     strscan (3.1.0)
     thor (1.3.1)
     timeout (0.4.1)
-    turbo-rails (2.0.5)
+    turbo-rails (2.0.6)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -375,7 +375,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.16)
+    zeitwerk (2.6.17)
 
 PLATFORMS
   x86_64-linux
