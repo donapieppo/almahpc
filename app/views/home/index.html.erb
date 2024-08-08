@@ -22,21 +22,21 @@
   <% end %>
 <% else %>
   <div class="text-center my-3">
-    <h3 class="my-3">Per accedere usare le credenziali Unibo</h3>
+    <h3 class="my-3">To access use your Unibo account.</h3>
     <% if Rails.env.development? && Rails.configuration.dm_unibo_common[:omniauth_provider] == :developer %>
       <%= form_with url: "/dm_unibo_common/auth/developer", data: {turbo: false} do |f| %> 
-        <%= f.button dm_icon('sign-in', text: " Developer login", size: :lg), class: "btn btn-primary" %> 
+        <%= f.button dm_icon('sign-in', text: "Developer login", size: :lg), class: "btn btn-primary" %> 
       <% end %>
     <% elsif Rails.env.production? && Rails.configuration.dm_unibo_common[:omniauth_provider] == :azure_activedirectory_v2 %>
       <%= form_with url: "/dm_unibo_common/auth/azure_activedirectory_v2", data: {turbo: false} do |f| %> 
-        <%= f.button dm_icon('sign-in', text: " Unibo login", size: :lg), class: "btn btn-primary" %> 
+        <%= f.button dm_icon('sign-in', text: "Unibo login", size: :lg), class: "btn btn-primary" %> 
       <% end %>
     <% end %>
   </div>
 <% end %>
 
-<div class="lead alert alert-info my-5 font-lg">
-  <p>Using <strong>HPC@UNIBO portal</strong> a user can:</p>
+<div class="alert alert-secondary my-5">
+  <p>Using <strong>HPC@UNIBO portal</strong> (when allowed) you can:</p>
   <ul style="list-style-type: disc">
     <li style="list-style-type: disc">add new users (@unibo.it, @studio.unibo.it) to the HPC groups you are manager;</li>
     <li style="list-style-type: disc">check the active projects;</li>
