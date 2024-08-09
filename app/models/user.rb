@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   def ldap_create
     Rails.logger.info("ldap_create for upn: #{upn}")
-    ad2gnu = AD2Gnu::Base.new(:personale, Rails.logger).AD_login.local_login
+    ad2gnu = User.ad2gnu
     if (ad_user = ad2gnu.ad.get_user(upn))
       Rails.logger.info(ad_user.inspect)
       ad2gnu.local.add_user(ad_user)
@@ -21,5 +21,9 @@ class User < ApplicationRecord
       u.ldap_create
     end
     u
+  end
+
+  def self.ad2gnu
+    AD2Gnu::Base.new(:personale, Rails.logger).AD_login.local_login
   end
 end

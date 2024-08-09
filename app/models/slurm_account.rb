@@ -11,9 +11,9 @@ class SlurmAccount < ApplicationRecord
   end
 
   def syncronizeInLdap
-    ad2gnu = AD2Gnu::Base.new(:personale, Rails.logger).AD_login.local_login
     g = AD2Gnu::LocalGroup.new(slug, name)
 
+    ad2gnu = User.ad2gnu
     if ad2gnu.local.get_group(slug) # if exists
       ad2gnu.local.update_group(g)
     else # if to create

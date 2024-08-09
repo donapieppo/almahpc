@@ -9,7 +9,7 @@ class SlurmAssociation < ApplicationRecord
   end
 
   def syncronizeInLdap
-    ad2gnu = AD2Gnu::Base.new(:personale, Rails.logger).AD_login.local_login
+    ad2gnu = User.ad2gnu
     ldap_user = ad2gnu.local.get_user(user.upn)
     ldap_group = ad2gnu.local.get_group(slurm_account.slug)
 
