@@ -23,6 +23,7 @@ class User < ApplicationRecord
     u
   end
 
+  # AD2Gnu
   def self.ad2gnu
     AD2Gnu::Base.new(:personale, Rails.logger).AD_login.local_login
   end
