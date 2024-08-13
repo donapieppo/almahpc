@@ -4,13 +4,13 @@ class SlurmAccount < ApplicationRecord
 
   validates :slug, format: {with: /\A[a-z]+[a-z0-9_.]+\z/, message: "Only letters,numbers,underscore,_,dot"}
 
-  after_save :syncronizeInLdap
+  after_save :syncronize_in_ldap
 
   def to_s
     name
   end
 
-  def syncronizeInLdap
+  def syncronize_in_ldap
     g = AD2Gnu::LocalGroup.new(slug, name)
 
     ad2gnu = User.ad2gnu

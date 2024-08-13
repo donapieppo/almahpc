@@ -2,13 +2,13 @@ class SlurmAssociation < ApplicationRecord
   belongs_to :user
   belongs_to :slurm_account
 
-  after_save :syncronizeInLdap
+  after_save :syncronize_in_ldap
 
   def manager?
     manager
   end
 
-  def syncronizeInLdap
+  def syncronize_in_ldap
     ad2gnu = User.ad2gnu
     ldap_user = ad2gnu.local.get_user(user.upn)
     ldap_group = ad2gnu.local.get_group(slurm_account.slug)
