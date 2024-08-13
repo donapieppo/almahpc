@@ -14,7 +14,7 @@ class SlurmAssociation < ApplicationRecord
     ldap_group = ad2gnu.local.get_group(slurm_account.slug)
 
     if ldap_user && ldap_group
-      Rails.logger.info("syncronizeInLdap: #{ldap_user.inspect}, #{ldap_group.inspect}")
+      Rails.logger.info("syncronize_in_ldap: #{ldap_user.inspect}, #{ldap_group.inspect}")
       ad2gnu.local.add_user_to_group(ldap_user, ldap_group)
     end
   end
