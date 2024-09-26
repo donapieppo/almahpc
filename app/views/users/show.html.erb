@@ -1,18 +1,20 @@
-<h1><%= @user.cn %></h1>
+<h1><%= dm_icon("user") %> <%= @user.cn %></h1>
 
 <div class="row">
   <div class="col-md-6">
     <p class="fw-bold">The user belongs to the following HPC groups:</p>
     <div class="list-group">
-    <% @user.slurm_associations.includes(:slurm_account).each do |hm| %>
-      <%= link_to hm.slurm_account, hm.slurm_account, class: "list-group-item list-group-item-action" %>
-    <% end %>
+      <% @user.slurm_associations.includes(:slurm_account).each do |hm| %>
+        <%= link_to hm.slurm_account, class: "list-group-item list-group-item-action" do %>
+          <%= dm_icon("users") %> <%= hm.slurm_account %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
 
 <% if @user.authorized_keys.blank? %>
   <p class="alert alert-warning small my-3">
-    No SSH Authorized Keys present.
+  No SSH Authorized Keys present.
   </p>
 <% end %>

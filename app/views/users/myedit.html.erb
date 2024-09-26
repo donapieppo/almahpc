@@ -1,11 +1,11 @@
-<h1><%= @user %></h1>
+<h1><%= dm_icon("user") %> <%= @user %></h1>
 
-<div class="alert alert-primary">
+<div class="alert alert-info">
   In this page you can set the content of the file <i>.ssh/authorized_keys</i>
   in the home of your HPC account.
 </div>
 
-<%= simple_form_for @user do |f| %>
+<%= simple_form_for @user, html: {class: "my-3"} do |f| %>
   <%= f.input :authorized_keys, input_html: {rows: 10} %>
   <%= f.submit "Save" %>
 <% end %>
