@@ -1,5 +1,9 @@
+# users in ldap and slurmdbd
+# AdminLevel==None
+# Partition= Name of Slurm partition this association applies to
 class User < ApplicationRecord
   include DmUniboCommon::User
+  has_many :authorized_keys
   has_many :slurm_associations
   has_and_belongs_to_many :slurm_accounts, through: :slurm_associations
 
@@ -26,5 +30,13 @@ class User < ApplicationRecord
   # AD2Gnu create base
   def self.ad2gnu
     AD2Gnu::Base.new(:personale, Rails.logger).AD_login.local_login
+  end
+
+  def dn
+    "uid=#{uid},dc=hpc,dc=unibo,dc=it"
+  end
+
+  def uid
+    upn.gsub(/@.*/, "")
   end
 end

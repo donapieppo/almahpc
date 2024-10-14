@@ -20,6 +20,8 @@
     You are <strong>not member</strong> of any HPC@UNIBO group yet.
     In order to apply please....
   <% end %>
+
+  <%= render AuthorizedKey::ListComponent.new(current_user) %>
 <% else %>
   <div class="text-center my-3">
     <h3 class="my-3">To access use your Unibo account.</h3>
@@ -41,4 +43,7 @@
     <li style="list-style-type: disc">add new users (@unibo.it, @studio.unibo.it) to the HPC groups you are manager;</li>
     <li style="list-style-type: disc">check the active projects;</li>
   </ul>
+
+  <p>Please visit the <%= link_to 'instructions page', guide_path %> for more informations about the AlmaHPC cluster.</p>
 </div>
+

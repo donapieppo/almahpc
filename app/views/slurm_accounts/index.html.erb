@@ -8,7 +8,7 @@
 </div>
 
 <% if policy(:slurm_account).new? %>
-  <div class="my-3 text-pend">
+  <div class="my-3 text-end">
     <%= link_to "New group", new_slurm_account_path, class: "btn btn-primary" %>
   </div>
 <% end %>

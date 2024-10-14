@@ -2,9 +2,9 @@
   <% if current_user %>
     <li><%= link_to dm_icon('home', text: 'Home', size: :lg), main_app.root_path %></li>
     <li><%= link_to dm_icon('users', text: 'HPC Groups', size: :lg), main_app.slurm_accounts_path %></li>
-    <li><%= link_to dm_icon('user', text: 'My profile', size: :lg), main_app.myedit_users_path %></li>
     <% if policy(:user).index? %>
       <li><%= link_to dm_icon('users', text: 'Users', size: :lg), main_app.users_path %></li>
     <% end %>
+    <li><%= link_to dm_icon('book', text: 'Guide', size: :lg), main_app.guide_path %></li> 
   <% end %>
 <% end %>

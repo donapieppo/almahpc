@@ -15,10 +15,6 @@ class UserPolicy < ApplicationPolicy
     @user && ((@user == @record) || @user.staff?)
   end
 
-  def me?
-    @user
-  end
-
   def myedit?
     @user
   end

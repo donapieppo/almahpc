@@ -4,11 +4,11 @@
 </h1>
 
 <%= simple_form_for [@slurm_account, @slurm_association] do |f| %>
-  <div>
-    <p>
-      A user is <strong>manager</strong> if he/she can add and delete users in the HPC group.
-    </p>
-    <%= label_tag 'Manager: ' %> <%= check_box_tag 'manager', 'manager', @slurm_association.manager %>
+  <div class="info">
+  A user is <strong>manager</strong> if he/she can add and delete users in the HPC group.
+  </div>
+  <div class="my-3">
+    <%= f.input :manager, label: "Set #{@slurm_association.user} manager.", input_html: {style: "font-size: 150%"}, label_html: {style: "font-size: 150%; color: black"}  %>
   </div>
   <%= f.submit "Save" %>
 <% end %>

@@ -1,3 +1,7 @@
+# in ldap join tra user / group (standard unix user/group)
+# in slurmdbd join tra user / slurm_account
+# "associations", consist of the cluster, a user, account and optionally a partition.
+# association: The entity used to group information consisting of four parameters: account, cluster, partition (optional), and user
 class SlurmAssociation < ApplicationRecord
   belongs_to :user
   belongs_to :slurm_account

@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @slurm_associations = @user.slurm_associations.includes(:slurm_account).load
+    @authorized_keys = @user.authorized_keys
     authorize @user
   end
 
@@ -22,32 +24,6 @@ class UsersController < ApplicationController
       flash[:error] = "Operation not possibile."
     end
     redirect_to users_path
-  end
-
-  def me
-    if (@user = current_user)
-      authorize @user
-      render action: :show
-    else
-      skip_authorization
-      redirect_to root_path
-    end
-  end
-
-  def myedit
-    @user = current_user
-    authorize @user
-    render action: :myedit
-  end
-
-  def update
-    @user = current_user
-    authorize @user
-    if @user.update(authorized_keys: params[:user][:authorized_keys])
-      redirect_to me_users_path, notice: "I tuoi dati sono stati registrati."
-    else
-      render action: :edit, status: :unprocessable_entity
-    end
   end
 
   # JSON pubblico per tutti
