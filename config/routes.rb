@@ -9,12 +9,13 @@ Rails.application.routes.draw do
   get "up123", to: "rails/health#show", as: :rails_health_check
 
   get "/home", to: "home#index", as: "home"
+  get "/guide", to: "home#guide", as: "guide"
+
   root "home#index"
 
   resources :users do
-    get :me, on: :collection
-    get :myedit, on: :collection
     get :memberships_to_sync, on: :collection
+    resources :authorized_keys
   end
 
   scope ":__org__" do
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
       resources :slurm_associations
     end
 
-    get "/", to: "slurm_accounts#index", as: "current_organization_root"
+    # get "/", to: "slurm_accounts#index", as: "current_organization_root"
+    get "/", to: "home#index", as: "current_organization_root"
   end
 end
