@@ -1,0 +1,89 @@
+<h1><%= dm_icon("book") %> HPC guide</h1>
+
+<p>
+This HPC cluster is managed by <a href="https://slurm.schedmd.com">slurm</a>.
+</p>
+
+<h2>Slurm</h2>
+
+<p>
+The Slurm batch-queueing system provides the mechanism to submit your jobs to the AlmaHPC cluster.
+You cannot access the cluster nodes directly but you will only log in to the login nodes.
+</p>
+
+<h2>Login nodes</h2>
+<p>
+To access the login nodes (via ssh) you have to save your <strong>authorized keys</strong> on
+<%= link_to "your profile page", myedit_users_path %> in this web application.
+</p>
+
+<p>Then you can ssh to one of the following node:</p>
+
+<ul>
+  <li>login-01.hpc.unibo.it</li>
+  <li>login-02.hpc.unibo.it</li>
+  <li>login-03.hpc.unibo.it</li>
+</ul>
+
+<h2>Submit jobs from login nodes</h2>
+
+<p>
+Here we give basic examples of how to submit jobs to the cluster.
+</p>
+
+<p>
+Here an example script specifies a partition, time limit, memory allocation and number of cores. 
+All your scripts should specify values for these four parameters. 
+</p>
+
+<code>
+  #!/bin/bash
+  #
+  #SBATCH -p gpu # partition (queue)
+  #SBATCH -c 1 # number of cores
+  #SBATCH --mem 100 # memory pool for all cores
+  #SBATCH -t 0-2:00 # time (D-HH:MM)
+  #SBATCH -o slurm.%N.%j.out # STDOUT
+  #SBATCH -e slurm.%N.%j.err # STDERR
+
+  module load cuda
+  module load miniconda/3
+
+  nvcc -V
+  python3 -c 'import torch;print(torch.cuda.is_available())'
+</code>
+
+Now you can submit your job with the command:
+
+<code>
+  sbatch myscript.sh
+</code>
+
+If you want to test your job and find out when your job is estimated to run use (note this does not actually submit the job):
+
+<code>
+  sbatch --test-only myscript.sh
+</code>
+
+<h2>Tools for monitoring your jobs</h2>
+
+<h3>squeue</h3>
+
+<p>
+The most basic way to check the status of the batch system are the programs squeue and sinfo. We can check which jobs are active with <code>squeue</code>.
+</p>
+
+<code>
+  [araim1@maya-usr1 ~]$ squeue
+  JOBID PARTITION     NAME     USER  ST       TIME  NODES QOS    NODELIST(REASON)
+  1389  parallel fmMle_no   araim1  PD       0:00     32 normal (Resources)
+  1381  parallel fmMle_no   araim1   R      15:52      1 normal n7
+</code>
+
+<p>
+Notice that the first job is in state PD (pending), and is waiting for 32 nodes to become available. The second job is in state R (running), and is executing on node n7.
+</p>
+
+<h3>Container</h3>
+
+<a href="https://apptainer.org/docs/user/main">Apptainer</a>
