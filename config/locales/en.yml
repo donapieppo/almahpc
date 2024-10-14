@@ -44,4 +44,6 @@ en:
         slug: Name
         name: Description
         description: Notes
+      authorized_key:
+        name: Key
 
