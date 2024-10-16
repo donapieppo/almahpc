@@ -49,6 +49,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "authorized_keys", id: { type: :integer, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "user_id", null: false, unsigned: true
+    t.text "name", null: false
+    t.text "description"
+    t.datetime "created_at", precision: nil
+    t.index ["user_id"], name: "fk_users_authorized_keys"
+  end
+
   create_table "organizations", id: { type: :integer, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 250
     t.string "name"
@@ -96,7 +104,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
     t.string "name"
     t.string "surname"
     t.string "email"
-    t.text "authorized_keys"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["upn"], name: "index_upn_on_users"
@@ -104,6 +111,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_110013) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "authorized_keys", "users", name: "fk_users_authorized_keys", on_delete: :cascade
   add_foreign_key "permissions", "organizations", name: "fk_organization_permission", on_delete: :cascade
   add_foreign_key "permissions", "users", name: "fk_user_permission", on_delete: :cascade
   add_foreign_key "slurm_associations", "partitions", name: "fk_partition_slurm_associations", on_delete: :cascade
