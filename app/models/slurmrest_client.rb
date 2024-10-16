@@ -71,4 +71,9 @@ class SlurmrestClient
     r = conn.post("#{B}/associations/", q)
     r.status == 200
   end
+
+  def del_user(name)
+    r = conn.delete("#{B}/user/#{name}")
+    r.status == 200
+  end
 end

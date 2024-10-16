@@ -1,9 +1,11 @@
 <% if @keys.any? %>
   <% @keys.each do |ak| %>
     <div class="dm-card">
-      <div class="dm-card-header">Authorized Key: <%= ak.description %></div>
-      <div class="dm-card-body"><%= ak.name %></div>
-      <div class="dm-card-footer text-end"><%= link_to_delete "Delete", [@user, ak] %></div>
+      <div class="dm-card-header py-2">SSH Authorized Key: <i><%= ak.description %></i></div>
+      <div class="dm-card-body">
+        <div class="font-small"><%= ak.name %></div>
+        <div class="text-end"><%= link_to_delete "Delete", [@user, ak] %></div>
+      </div>
     </div>
   <% end %>
 <% else %>
@@ -11,4 +13,4 @@
   No SSH Authorized Keys present.
   </p>
 <% end %>
-<%= link_to "Add authorized_keys", new_user_authorized_key_path(@user) %>
+<%= link_to "Add new SSH Authorized Key", new_user_authorized_key_path(@user), class: "btn btn-primary" %>

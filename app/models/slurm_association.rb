@@ -22,4 +22,8 @@ class SlurmAssociation < ApplicationRecord
       ad2gnu.local.add_user_to_group(ldap_user, ldap_group)
     end
   end
+
+  def self.user_ids
+    SlurmAssociation.select(&:user_id).map(&:user_id)
+  end
 end

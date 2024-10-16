@@ -20,6 +20,12 @@ class User < ApplicationRecord
     end
   end
 
+  def ldap_delete
+    Rails.logger.info("ldap_delete for user: #{id} #{upn}")
+    ad2gnu = User.ad2gnu
+    ad2gnu.delete(dn)
+  end
+
   def self.syncronizeDbAndLdap(u_upn)
     if (u = User.syncronize(u_upn))
       u.ldap_create
